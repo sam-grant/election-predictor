@@ -6,7 +6,7 @@
 
 ## Overview
 
-Can macroeconomic indicators predict US presidential election outcomes? This analysis uses machine learning to test such factors, particularly unemployment and inflation rates, as predictors, achieving **58.8% accuracy** with logistic regression. This is a promising, but modest, improvement over random chance (50%) — perhaps indicating that other factors, such as social issues, account for ~40% of the variance. 
+Can macroeconomic indicators predict US presidential election outcomes? This analysis uses machine learning to test such factors, particularly unemployment and inflation rates, as predictors, achieving **58.8% accuracy** with logistic regression. This is a promising, but modest, improvement over random chance (50%). Other factors, such as social issues, could account for ~40% of the variance. 
 
 ---
 
@@ -15,6 +15,9 @@ Can macroeconomic indicators predict US presidential election outcomes? This ana
 ### Top economic predictors
 1. **Unemployment rate** - Most important predictor (importance: 0.977)
 2. **Inflation rate** - Second most important (importance: 0.797)
+
+### Weak economic predictors 
+Factors such as **net migration**, **total population**, and **GDP** were found to be weakly or not correlated with election outcomes. 
 
 ### Historical patterns
 - **High unemployment (>7%)** → Favors Democrats
