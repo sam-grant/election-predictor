@@ -1,13 +1,11 @@
 import os
-# import awkward as ak
 import matplotlib.pyplot as plt
-# import math
-# import numpy as np
-# from scipy import stats
 from matplotlib.ticker import ScalarFormatter
-# import matplotlib.colors as colors
 
 class Plot:
+    """
+    Plotting class
+    """
     def __init__(self):
         """  init """
         style_path = os.path.join(os.path.dirname(__file__), 'election.mplstyle')
@@ -34,12 +32,12 @@ class Plot:
                 cbar.ax.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))  # Set scientific notation
 
     def plot_graph(
-        self, x, y, xerr=None, yerr=None,
-        title=None, xlabel=None, ylabel=None,
-        xmin=None, xmax=None, ymin=None, ymax=None,
-        col='black', linestyle='None', fout='graph.png', 
-        log_x=False, log_y=False, NDPI=300,
-        show=True, save=True, ax=None
+            self, x, y, xerr=None, yerr=None,
+            title=None, xlabel=None, ylabel=None,
+            xmin=None, xmax=None, ymin=None, ymax=None,
+            col='black', linestyle='None', fout='graph.png', 
+            log_x=False, log_y=False, NDPI=300,
+            show=True, save=True, ax=None
         ):
         """  
         Plot a scatter graph with error bars (if included)
@@ -54,13 +52,6 @@ class Plot:
             xerr = [0] * len(x) 
         if yerr is None: # If only using xerr 
             yerr = [0] * len(y) 
-
-        # Convert string labels to numeric positions
-        # if isinstance(x[0], str):  # Check if x contains strings
-        #     x_labels = x
-        #     x = range(len(x))  # Convert strings to numeric indices for plotting
-        # else:
-        #     x_labels = None
 
         # Create graph
         ax.errorbar(x, y, xerr=xerr, yerr=yerr, fmt='o', color=col, markersize=4, ecolor=col, capsize=2, elinewidth=1, linestyle=linestyle, linewidth=1)
@@ -82,11 +73,6 @@ class Plot:
         plt.xlabel(xlabel)
         plt.ylabel(ylabel)
 
-        # Set the x-axis labels if x contains strings
-        # if x_labels is not None:
-        #     ax.set_xticks(range(len(x_labels)))  # Set the positions for the labels
-        #     ax.set_xticklabels(x_labels, rotation=45, ha='right')  # Set the labels with rotation
-
         # Scientific notation
         self.sci_not(ax) 
 
@@ -95,24 +81,22 @@ class Plot:
 
             if save:
                 plt.savefig(fout, dpi=300, bbox_inches="tight")
-                print(f"\n---> Wrote:\n\t{fout}")
+                print(f"\tWrote {fout}")
             
             if show:
                 plt.show()
 
-            plt.close()
-
     def plot_graph_overlay(
-        self, graphs_,
-        title=None, xlabel=None, ylabel=None,
-        xmin=None, xmax=None, ymin=None, ymax=None,
-        leg_pos='best', linestyle='None', fout='graph.png',
-        y_lines=None, x_lines=None,
-        log_x=False, log_y=False, NDPI=300, 
-        show=True, save=True
+            self, graphs_,
+            title=None, xlabel=None, ylabel=None,
+            xmin=None, xmax=None, ymin=None, ymax=None,
+            leg_pos='best', linestyle='None', fout='graph.png',
+            y_lines=None, x_lines=None,
+            log_x=False, log_y=False, NDPI=300, 
+            show=True, save=True
         ):
         """  
-        Overlay many scatter graphs
+        Overlay scatter graphs
         """  
         # Create figure and axes
         fig, ax = plt.subplots()
@@ -168,15 +152,10 @@ class Plot:
 
         # Draw
         plt.tight_layout()
-
         # Save 
         if save:
             plt.savefig(fout, dpi=NDPI, bbox_inches="tight")
-            print("\n---> Wrote:\n\t", fout)
-
-        # Save
+            print(f"\tWrote {fout}")
+        # Show
         if show:
             plt.show()
-
-        # Clear memory
-        plt.close(fig)
