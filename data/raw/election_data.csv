@@ -1,0 +1,61 @@
+﻿Year,Winner,Party,EC,PV,Lean,Era
+2024,Donald Trump,Republican,0.42,0.4834,Right,Populist 
+2020,Joseph Biden,Democratic,0.5688,0.5131,Left,Populist 
+2016,Donald Trump,Republican,0.569,0.462,Right,Populist 
+2012,Barack Obama,Democratic,0.617,0.511,Left,Partisan Polarisation
+2008,Barack Obama,Democratic,0.678,0.529,Left,Partisan Polarisation
+2004,George W. Bush,Republican,0.532,0.507,Right,Partisan Polarisation
+2000,George W. Bush,Republican,0.504,0.479,Right,Post-Cold War
+1996,William Clinton,Democratic,0.704,0.492,Left,Post-Cold War
+1992,William Clinton,Democratic,0.688,0.43,Left,Post-Cold War
+1988,George Bush,Republican,0.792,0.534,Right,Post-1960s Realignment
+1984,Ronald Reagan,Republican,0.976,0.588,Right,Post-1960s Realignment
+1980,Ronald Reagan,Republican,0.909,0.507,Right,Post-1960s Realignment
+1976,Jimmy Carter,Democratic,0.552,0.501,Left,Post-1960s Realignment
+1972,Richard Nixon,Republican,0.967,0.607,Right,Post-1960s Realignment
+1968,Richard Nixon,Republican,0.559,0.434,Right,Post-New Deal Realignment
+1964,Lyndon B. Johnson,Democratic,0.903,0.611,Left,Post-New Deal Realignment
+1960,John F. Kennedy,Democratic,0.564,0.497,Left,Post-New Deal Realignment
+1956,Dwight D. Eisenhower,Republican,0.861,0.574,Right,Post-New Deal Realignment
+1952,Dwight D. Eisenhower,Republican,0.832,0.549,Right,Post-New Deal Realignment
+1948,Harry Truman,Democratic,0.571,0.495,Left,Post-New Deal Realignment
+1944,Franklin D. Roosevelt,Democratic,0.814,0.534,Left,Post-New Deal Realignment
+1940,Franklin D. Roosevelt,Democratic,0.985,0.608,Left,Post-New Deal Realignment
+1936,Franklin D. Roosevelt,Democratic,0.985,0.608,Left,Progressive Era to New Deal
+1932,Franklin D. Roosevelt,Democratic,0.889,0.574,Left,Progressive Era to New Deal
+1928,Herbert Hoover,Republican,0.836,0.582,Right,Progressive Era to New Deal
+1924,Calvin Coolidge,Republican,0.719,0.54,Right,Progressive Era to New Deal
+1920,Warren G. Harding,Republican,0.761,0.603,Right,Progressive Era to New Deal
+1916,Woodrow Wilson,Democratic,0.522,0.492,Left,Progressive Era to New Deal
+1912,Woodrow Wilson,Democratic,0.819,0.418,Left,Progressive Era to New Deal
+1908,William Howard Taft,Republican,0.665,0.516,Right,Progressive Era to New Deal
+1904,Theodore Roosevelt,Republican,0.706,0.564,Left,Progressive Era to New Deal
+1900,William McKinley,Republican,0.653,0.517,Right,Progressive Era to New Deal
+1896,William McKinley,Republican,0.61,0.511,Right,Post-Civil War Realignment 
+1892,Grover Cleveland,Democratic,0.624,0.46,Right,Post-Civil War Realignment 
+1888,Benjamin Harrison,Republican,0.581,0.478,Right,Post-Civil War Realignment 
+1884,Grover Cleveland,Democratic,0.546,0.489,Right,Post-Civil War Realignment 
+1880,James A. Garfield,Republican,0.58,0.483,Right,Post-Civil War Realignment 
+1876,Rutherford B. Hayes,Republican,0.501,0.48,Right,Post-Civil War Realignment 
+1872,Ulysses S. Grant,Republican,0.819,0.556,Right,Post-Civil War Realignment 
+1868,Ulysses S. Grant,Republican,0.728,0.527,Right,Post-Civil War Realignment 
+1864,Abraham Lincoln,Republican,0.906,0.551,Left,Civil War
+1860,Abraham Lincoln,Republican,0.594,0.398,Left,Antebellum
+1856,James Buchanan,Democratic,0.588,0.453,Right,Jacksonian
+1852,Franklin Pierce,Democratic,0.858,0.508,Right,Jacksonian
+1848,Zachary Taylor,Whig,0.562,0.473,Right,Jacksonian
+1844,James K. Polk,Democratic,0.618,0.495,Right,Jacksonian
+1840,William Henry Harrison,Whig,0.796,0.529,Right,Jacksonian
+1836,Martin Van Buren,Democratic,0.578,0.508,Right,Jacksonian
+1832,Andrew Jackson,Democratic,0.76,0.542,Right,Jacksonian
+1828,Andrew Jackson,Democratic,0.682,0.561,Right,Jacksonian
+1824,John Quincy Adams, Democratic-Republican,0.322,0.309,Left,Pre-Modern Party System
+1820,James Monroe, Democratic-Republican,0.983,NaN,Right,Pre-Modern Party System
+1816,James Monroe, Democratic-Republican,0.839,NaN,Right,Pre-Modern Party System
+1812,James Madison, Democratic-Republican,0.587,NaN,Non-partisan,Pre-Modern Party System
+1808,James Madison, Democratic-Republican,0.697,NaN,Non-partisan,Pre-Modern Party System
+1804,Thomas Jefferson, Democratic-Republican,0.92,NaN,Left,Pre-Modern Party System
+1800,Thomas Jefferson,Democratic-Republican,0.529,NaN,Left,Pre-Modern Party System
+1796,John Adams,Federalist,0.511,NaN,Right,Pre-Modern Party System
+1792,George Washington,Federalist,1,NaN,Non-partisan,Pre-Modern Party System
+1789,George Washington,Federalist,1,NaN,Non-partisan,Pre-Modern Party System
