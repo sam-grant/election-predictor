@@ -1,5 +1,6 @@
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
+from pathlib import Path
 
 class Train:
     def __init__(self, X, y, model):
@@ -7,21 +8,25 @@ class Train:
         self.X = X
         self.y = y
 
-    def train(self, random_state=42, loocv=False, test_size=0.2, out_path=None, **hyperparams):
+    def train(self, tag, random_state=42, loocv=False, test_size=0.2, save_output=False, **hyperparams):
         """ Train the model with optional Leave-One-Out cross-validation """
         print(
             f"🚀 Training model: {self.model.__name__}\n"
+            f"  Tag: {tag}\n"
             f"  Random state: {random_state}\n"
-            f"  Leave-One-Out CV: {loocv}"
+            f"  Leave-One-Out CV: {loocv}\n"
+            f"  Test size: {test_size}\n"
+            f"  Save output: {save_output}\n"
+            f"  hyperparams: {hyperparams}\n"
         )
         if loocv:
-            return self._train_loocv(random_state, out_path, **hyperparams)
+            return self._train_loocv(random_state, tag, save_output, **hyperparams)
         else:
             print(f"  Test size: {test_size}\n")
-            return self._train_baseline(test_size, random_state, out_path, **hyperparams)
+            return self._train_baseline(test_size, random_state, tag, save_output, **hyperparams)
     
 
-    def _train_baseline(self, test_size, random_state, out_path, **hyperparams):
+    def _train_baseline(self, test_size, random_state, tag, save_output, **hyperparams):
         """ Train with a standard train-test split """
         # Split the data
         X_train, X_test, y_train, y_test = train_test_split(
@@ -39,18 +44,20 @@ class Train:
         print(f"✅ Training complete.\n")
 
         results = {
+            "tag": tag,
             "model": model,
             "y_test": y_test,
             "y_pred": y_pred,
             "y_proba": y_proba
         }
 
-        # Save if output path is provided
-        self._save_results(results, out_path)
+        if save_output:
+            out_path = Path(f"../results/{tag}")
+            self._save_results(results, out_path)
         
         return results
 
-    def _train_loocv(self, random_state, out_path, **hyperparams):
+    def _train_loocv(self, random_state, tag, save_output, **hyperparams):
         
         """ Train using Leave-One-Out cross-validation """
         from sklearn.model_selection import LeaveOneOut
@@ -78,14 +85,16 @@ class Train:
         print(f"✅ Training complete.\n")
 
         results = {
+            "tag": tag,
             "model": model,
             "y_test": y_tests,
             "y_pred": y_preds,
             "y_proba": y_probas,
         }
 
-        # Save if output path is provided
-        self._save_results(results, out_path)
+        if save_output:
+            out_path = Path(f"../results/{tag}")
+            self._save_results(results, out_path)
 
         return results
 
@@ -104,10 +113,7 @@ class Train:
 
     def _save_results(self, results, out_path):
         import joblib
-        if out_path:
-            # Ensure directory exists
-            out_path.mkdir(parents=True, exist_ok=True)
-            # Save to file inside directory
-            file_path = out_path / "results.pkl"
-            joblib.dump(results, file_path)
-            print(f"✅ Results saved to {file_path}")
+        out_path.mkdir(parents=True, exist_ok=True)
+        file_path = out_path / "results.pkl"
+        joblib.dump(results, file_path)
+        print(f"✅ Results saved to {file_path}")
