@@ -32,7 +32,7 @@ def process_wb_data(file_path):
     df_wb = ( # DataFrames are builder objects, can chain methods
         pd.read_csv(file_path)
         .replace("..", pd.NA)  # Replace missing values
-        .drop(["Series Code", "Country Name", "Country Code", "index"], axis=1)  # Drop unneeded columns
+        .drop(["Series Code", "Country Name", "Country Code"], axis=1)  # Drop unneeded columns
         .rename(columns={"Series Name": "Year"})  # Rename for clarity
     )
     # Clean year formatting
@@ -46,6 +46,13 @@ def process_wb_data(file_path):
     df_wb.loc[df_wb["Year"] == "2023", "Year"] = "2024"
     # Convert Year to int 
     df_wb["Year"] = df_wb["Year"].astype(int)
+    
+    # Rescale Foreign direct investment from dollars to trillions 
+    if "Foreign direct investment, net (BoP, current US$)" in df_wb.columns:
+        df_wb["Foreign direct investment, net (BoP, current US$)"] = (
+            pd.to_numeric(df_wb["Foreign direct investment, net (BoP, current US$)"], errors="coerce") / 1e12
+        )
+    
     print("Processed World Bank data\n")
     return df_wb
 

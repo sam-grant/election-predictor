@@ -93,7 +93,7 @@ class Analyse:
         plt.barh(range(len(df_importance)), df_importance["Importance"])
         plt.yticks(range(len(df_importance)), df_importance["Feature"], fontsize=10)
         plt.xlabel("Importance")
-        plt.title(f"Top {top_n} features")
+        # plt.title(f"Top {top_n} features")
         plt.gca().invert_yaxis()
         plt.tight_layout()
         
