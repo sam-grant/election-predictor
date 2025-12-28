@@ -35,16 +35,76 @@ class Analyse:
         plt.tight_layout()
 
         if save_output:
-            out_path = Path(f"../results/{self.results['tag']}")
+            out_path = Path(f"../images/{self.results['tag']}")
             out_path.mkdir(parents=True, exist_ok=True)
             file_path = out_path / "roc_curve.png"
             plt.savefig(file_path)
+            print(f"✅ Wrote {file_path}")
         plt.show()
+
+        return {
+            "fpr": fpr,
+            "tpr": tpr,
+            "auc": auc_score
+        }
 
     def df_classification_report(self):
         report_dict = classification_report(self.results["y_test"], self.results["y_pred"], output_dict=True)
         report = pd.DataFrame(report_dict).transpose()
         return report
+
+    def df_feature_importance(self, X, top_n=15):
+        """
+        Extract feature importance from the model.
+        """
+        model = self.results["model"]
+        feature_names = X.columns
+        
+        # Try different methods depending on model type
+        if hasattr(model, 'coef_'):
+            # Linear models
+            importance = np.abs(model.coef_[0])
+        elif hasattr(model, "feature_importances_"):
+            # Tree-based models (RandomForest, XGBoost)
+            importance = model.feature_importances_
+        else:
+            raise ValueError(f"Model type {type(model).__name__} doesn't support feature importance extraction")
+        
+        # Create DataFrame
+        df_importance = pd.DataFrame({
+            "Feature": feature_names,
+            "Importance": importance
+        }).sort_values("Importance", ascending=False)
+        
+        if top_n:
+            df_importance = df_importance.head(top_n)
+        
+        return df_importance
+    
+    def plot_feature_importance(self, X, top_n=15, save_output=False):
+        """
+        Plot feature importance 
+        """
+        df_importance = self.df_feature_importance(X, top_n=top_n)
+        
+        # Adjust figure height based on number of features
+        fig_height = max(6, len(df_importance) * 0.4)
+        plt.figure(figsize=(10, fig_height))
+        plt.barh(range(len(df_importance)), df_importance["Importance"])
+        plt.yticks(range(len(df_importance)), df_importance["Feature"], fontsize=10)
+        plt.xlabel("Importance")
+        plt.title(f"Top {top_n} features")
+        plt.gca().invert_yaxis()
+        plt.tight_layout()
+        
+        if save_output:
+            out_path = Path(f"../images/{self.results['tag']}")
+            out_path.mkdir(parents=True, exist_ok=True)
+            file_path = out_path / "feature_importance.png"
+            plt.savefig(file_path, bbox_inches='tight')
+            print(f"✅ Wrote {file_path}")
+        plt.show()
+        
         # cm = self.confusion_matrix()
         # tn, fp, fn, tp = cm.ravel()
         # # Positive precision: "out of those predicted positive, what fraction were actually positive?" 
@@ -73,15 +133,33 @@ class Analyse:
         # 
         # return report
 
-    def execute(self, save_output=False):
-        # display only works interfactively
+    def execute(self, X=None, save_output=False):
+        # display only works interactively
         print("⭐ Confusion matrix:\n")
-        display(self.df_confusion_matrix())
+        cm = self.df_confusion_matrix()
+        display(cm)
         print("\n⭐ Classification report:\n")
-        display(self.df_classification_report())
-        print("\n⭐ ROC curve:\n")
-        self.plot_roc_curve(save_output=save_output)
-
+        report = self.df_classification_report()
+        display(report)
+        print("\n⭐ ROC curve & feature importance:\n")
+        roc = self.plot_roc_curve(save_output=save_output)
+        
+        # Feature importance if X is provided
+        feature_importance = None
+        if X is not None:
+            try:
+                feature_importance = self.plot_feature_importance(X, top_n=15, save_output=save_output)
+                display(feature_importance)
+            except ValueError as e:
+                print(f"⚠️ Feature importance not available: {e}")
+        
+        # Return all results
+        return {
+            "cm": cm,
+            "report": report,
+            "roc": roc,
+            "feature_importance": feature_importance
+        }
     # def confusion_matrix(self, out_name=None):
     #    # tp = len(self.results["y_test"][(self.results["y_pred"] == 1) & (self.results["y_test"] == 1)]
     #    # tn = len(self.results["y_test"][(self.results["y_pred"] == 0) & (self.results["y_test"] == 0)])
