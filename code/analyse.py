@@ -89,7 +89,7 @@ class Analyse:
         
         # Adjust figure height based on number of features
         fig_height = max(6, len(df_importance) * 0.4)
-        plt.figure(figsize=(10, fig_height))
+        plt.figure(figsize=(12, fig_height))
         plt.barh(range(len(df_importance)), df_importance["Importance"])
         plt.yticks(range(len(df_importance)), df_importance["Feature"], fontsize=10)
         plt.xlabel("Importance")
