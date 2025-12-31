@@ -14,7 +14,7 @@ The work deploys machine learning methods to predict winners from 1960-2024 US p
 3. **Inflation** (8-18% importance)
 
 ### The misses
-**2016 Trump** and **1976 Carter** were both misclassifed, which may reflect their unique poltical circumstances: the rise of populism with Trump and post-Watergate sentiment for Carter. 
+**2016 Trump** and **1976 Carter** were both misclassified, which may reflect their unique political circumstances: the rise of populism with Trump and post-Watergate sentiment for Carter. 
 
 <!-- ### Detailed abstract
 
@@ -166,7 +166,7 @@ Carter 1976 is another difficult prediction:
 - **SVC**: 0.669 probability Republican 
 - **XGBoost**: 0.700 probability Republican
 
-All models predicted a Rebublican victory with high relative confidence, which suggest that this election was driven by uniquely political circumstances during the post-Watergate upheaval. 
+All models predicted a Republican victory with high relative confidence, which suggests that this election was driven by uniquely political circumstances during the post-Watergate upheaval. 
 
 **3. Consensus predictions**
 
@@ -256,7 +256,7 @@ Republican outcomes strongly associate with **lower unemployment** and **higher 
 
 5. **Exceptional political circumstances override economic signals.** Both misclassifications (2016 Trump, 1976 Carter) involved unique political contexts — populist movements and post-Watergate upheaval — that macro socioeconomic indicators cannot capture.
 
-6. **Investment and inflation dominate predictions.** Gross capital formation (~24% normalised importance across models), inflations, and unemployment drive model decisions, suggesting economic stability and business confidence strongly influence electoral preferences. The consistency of these rankings across all four model types (LR, RF, SVC, XGB) validates this. 
+6. **Investment and inflation dominate predictions.** Gross capital formation (~24% normalised importance across models), inflation, and unemployment drive model decisions, suggesting economic stability and business confidence strongly influence electoral preferences. The consistency of these rankings across all four model types (LR, RF, SVC, XGB) validates this. 
 
 ## Assumptions and limitations
 
@@ -271,7 +271,7 @@ Elections are not independent; political momentum and demographic shifts create 
 
 ## Technical details
 
-The workflow from raw data to a set of optimised models is contained in `main.ipynb`. Reptitive tasks are handled by three internal modules: 
+The workflow from raw data to a set of optimised models is contained in `main.ipynb`. Repetitive tasks are handled by three internal modules: 
 
 1. `process_data.py`: Processes, cleans, and merges raw data into data/proc/data.csv 
 1. `train.py`: Contains a configurable class Train which runs the training and outputs standard results (the model, test predictions, truth values, and probabilities) 
