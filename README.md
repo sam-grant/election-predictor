@@ -1,10 +1,26 @@
 # Predicting US presidential elections (1960-2024)
 
-*Can macro socioeconomic indicators predict US presidential election outcomes?*
+The work deploys machine learning methods to predict winners from 1960-2024 US presidential elections with **88.2% accuracy** using economic data.
 
-This study applies four machine learning algorithms (Logistic Regression, Random Forest, Support Vector Classifier, and XGBoost) to predict US presidential election outcomes (1960–2024), using macro socioeconomic indicators. After systematic feature engineering and hyperparameter optimisation, three independent model architectures converged on identical **88.2% accuracy (15/17 elections)**, suggesting this represents the performance ceiling achievable with this approach. Gross capital formation, unemployment, and inflation emerge as dominant predictors, with two consistent misclassifications (2016 Trump, 1976 Carter) reflect uniquely political circumstances that can override economic signals.
+## Key findings
 
-## Technical details
+✅ **Predicted 2024 correctly** (Trump victory)  
+✅ **15 of 17 elections** classified correctly (1960-2024)  
+✅ **Three independent ML algorithms converged** to identical 88.2% accuracy (linear, tree-based, kernel-based models)
+
+### What drives US presidential elections?
+1. **Gross capital formation** (~24% importance)
+2. **Unemployment** (14-29% importance)
+3. **Inflation** (8-18% importance)
+
+### The misses
+**2016 Trump** and **1976 Carter** were both misclassifed, which may reflect their unique poltical circumstances: the rise of populism with Trump and post-Watergate sentiment for Carter. 
+
+<!-- ### Detailed abstract
+
+This study applies four machine learning algorithms (Logistic Regression, Random Forest, Support Vector Classifier, and XGBoost) to predict US presidential election outcomes (1960–2024), using macro socioeconomic indicators. After systematic feature engineering and hyperparameter optimisation, three independent model architectures converged on identical **88.2% accuracy (15/17 elections)**, suggesting this represents the performance ceiling achievable with this approach. Gross capital formation, unemployment, and inflation emerge as dominant predictors, with two consistent misclassifications (2016 Trump, 1976 Carter) reflect uniquely political circumstances that can override economic signals. -->
+
+## Repo details
 
 The workflow from raw data to a set of optimised models is contained in `main.ipynb`. Reptitive tasks are handled by three internal modules: 
 
