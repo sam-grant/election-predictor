@@ -1,5 +1,5 @@
 # Generic figure tweaks 
-axes.prop_cycle: cycler("color", ['red','blue','green','orange','violet','cyan','pink','gray','yellow'])
+axes.prop_cycle: cycler("color", ["#C41E3A", "#0173B2", "#228B22", "#FF6600"])
 
 mathtext.default: regular
 font.size: 18
