@@ -81,17 +81,15 @@ class Analyse:
         
         return df_importance
     
-    def plot_feature_importance(self, X, top_n=15, save_output=False):
+    def plot_feature_importance(self, df_feature_importance, save_output=False):
         """
-        Plot feature importance 
+        Plot feature importance
         """
-        df_importance = self.df_feature_importance(X, top_n=top_n)
-        
         # Adjust figure height based on number of features
-        fig_height = max(6, len(df_importance) * 0.4)
+        fig_height = max(6, len(df_feature_importance) * 0.4)
         plt.figure(figsize=(12, fig_height))
-        plt.barh(range(len(df_importance)), df_importance["Importance"])
-        plt.yticks(range(len(df_importance)), df_importance["Feature"], fontsize=10)
+        plt.barh(range(len(df_feature_importance)), df_feature_importance["Importance"])
+        plt.yticks(range(len(df_feature_importance)), df_feature_importance["Feature"], fontsize=10)
         plt.xlabel("Importance")
         # plt.title(f"Top {top_n} features")
         plt.gca().invert_yaxis()
@@ -148,8 +146,10 @@ class Analyse:
         feature_importance = None
         if X is not None:
             try:
-                feature_importance = self.plot_feature_importance(X, top_n=15, save_output=save_output)
-                display(feature_importance)
+                df_feature_importance = self.df_feature_importance(X)
+                self.plot_feature_importance(df_feature_importance, save_output=save_output)
+                # Plotting works but DataFrame is None
+                display(df_feature_importance)
             except ValueError as e:
                 print(f"⚠️ Feature importance not available: {e}")
         
@@ -158,7 +158,7 @@ class Analyse:
             "cm": cm,
             "report": report,
             "roc": roc,
-            "feature_importance": feature_importance
+            "feature_importance": df_feature_importance
         }
     # def confusion_matrix(self, out_name=None):
     #    # tp = len(self.results["y_test"][(self.results["y_pred"] == 1) & (self.results["y_test"] == 1)]
