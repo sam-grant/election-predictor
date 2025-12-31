@@ -39,7 +39,7 @@ This analysis explores whether macro socioeconomic indicators can predict US pre
 - Linear interpolation filled remaining gaps
 - Final dataset: **35 features, 17 samples** (elections from 1960–2020)
 
-The small sample size (n=17) presents a fundamental challenge for model generalisation and necessitates careful validation strategies, including Leave-One-Out Cross Validation (LOOCV).
+The small sample size (n=17) requires careful validation using Leave-One-Out Cross Validation (LOOCV).
 
 ### Methodology
 
@@ -67,7 +67,7 @@ Random Forest demonstrates the highest baseline accuracy (70.6%), whereas Logist
 
 **Feature selection:**
 
-SelectKBest with ANOVA F-statistic identified the 10 most predictive features from the initial 35. These 10 features improved performance across all models.
+SelectKBest with ANOVA F-statistic identified the 10 most predictive features, improving performance across all models.
 
 **Interaction terms:**
 Products of features (degree=2, interaction_only=True) were trialed, producing 55 generated features from the 10 base features. `SelectKBest` then reduced these to 15 most predictive terms, capturing multiplicative relationships between indicators. The final models use **eight unique base features** (four standalone and seven appearing in interaction terms):
@@ -89,7 +89,7 @@ Key interaction terms include:
 
 #### 3. Hyperparameter optimisation
 
-A comprehensive grid search with LOOCV was then conducted on the four algorithms:
+A comprehensive grid search with LOOCV was conducted on the four algorithms:
 
 **Logistic Regression** (408 combinations):
 - Best parameters: C=0.001, penalty='l2', solver='liblinear'
@@ -111,7 +111,7 @@ A comprehensive grid search with LOOCV was then conducted on the four algorithms
 
 ### Model convergence
 
-**Three independent algorithms (LR, RF, SVC) converged on identical 88.2% accuracy** after optimisation. This convergence across fundamentally different model architectures -- linear (LR), kernel-based (SVC), and tree-based (RF) -- strongly suggests **88.2% represents the performance ceiling achievable with macro socioeconomic indicators alone**.
+**Three independent algorithms (LR, RF, SVC) converged on identical 88.2% accuracy** after optimisation. This convergence across fundamentally different architectures strongly suggests **88.2% represents the performance ceiling achievable with macro socioeconomic indicators alone**.
 
 ## Classifications
 
@@ -141,14 +141,12 @@ The table below shows model predictions with probability of Republican victory i
 
 **1. Model confidence varies dramatically**
 
-Logistic Regression exhibits remarkably low confidence across all predictions, with probabilities clustering tightly around 0.5 (range: 0.483–0.519). The model achieves 88.2% accuracy whilst expressing near-complete uncertainty about individual predictions. In contrast, Random Forest and SVC demonstrate strong confidence for most elections, with probabilities often exceeding 0.65 or falling below 0.35.
+Logistic Regression shows remarkably low confidence, with probabilities clustering around 0.5 (range: 0.483–0.519) despite 88.2% accuracy. Random Forest and SVC show strong confidence, with probabilities often exceeding 0.65 or below 0.35.
 
 
 ![Predicted probability distributions](images/predicted_probabilities.png)
 
 **2. The 2016 anomaly**
-
-Trump 2016 represents a challenging prediction:
 
 - **LR**: 0.498 probability Republican
 - **RF**: 0.140 probability Republican
@@ -157,9 +155,7 @@ Trump 2016 represents a challenging prediction:
 
 SVC succeeded where others failed, but just barely. This suggests 2016's outcome was nearly orthogonal to macro socioeconomic indicators.
 
-**3. The 1976 anomaly**
-
-Carter 1976 is another difficult prediction: 
+**3. The 1976 anomaly** 
 
 - **LR**: 0.504 probability Republican 
 - **RF**: 0.880 probability Republican 
@@ -189,7 +185,7 @@ These near-equiprobable predictions across models suggest the macro socioeconomi
 
 ### Feature importance analysis
 
-Feature importance was aggregated across all four optimised models. For interaction terms, importance was split equally between the two base features involved. The comparison reveals consistent patterns across different model architectures:
+Feature importance aggregated across models (interaction terms split equally between base features):
 
 ![Feature Importance Comparison](images/final_feature_importance_comparison.png)
 
@@ -214,7 +210,7 @@ Feature importance was aggregated across all four optimised models. For interact
 
 4. **Population growth** and **fertility rate** contribute moderately across all models, capturing demographic trends.
 
-5. Model agreement on feature rankings strengthens confidence that these economic indicators genuinely drive electoral outcomes rather than being artifacts of individual model architectures.
+5. Consistent feature rankings across models suggest these indicators genuinely drive electoral outcomes.
 
 ### Economic conditions and electoral outcomes
 
@@ -248,7 +244,7 @@ Republican outcomes strongly associate with **lower unemployment** and **higher 
 
 1. **Macro socioeconomic indicators are strong but imperfect predictors** of US presidential election outcomes, achieving 88.2% accuracy over 17 elections spanning 64 years.
 
-2. **Model convergence signals a performance ceiling.** Three independent algorithms with different architectures all converged on 88.2% accuracy, suggesting this represents the maximum achievable performance from macro socioeconomic data alone. Further improvement requires non-economic features to capture the remainder of the variance.
+2. **Model convergence signals a performance ceiling.** Three independent algorithms with different architectures all converged on 88.2% accuracy, suggesting this represents the maximum achievable performance from macro socioeconomic data alone.
 
 3. **Sample size is a limitation.** With only 17 observations, models are constrained by limited training data despite using LOOCV and shallow architectures to prevent overfitting.
 
@@ -256,7 +252,7 @@ Republican outcomes strongly associate with **lower unemployment** and **higher 
 
 5. **Exceptional political circumstances override economic signals.** Both misclassifications (2016 Trump, 1976 Carter) involved unique political contexts — populist movements and post-Watergate upheaval — that macro socioeconomic indicators cannot capture.
 
-6. **Investment and inflation dominate predictions.** Gross capital formation (~24% normalised importance across models), inflation, and unemployment drive model decisions, suggesting economic stability and business confidence strongly influence electoral preferences. The consistency of these rankings across all four model types (LR, RF, SVC, XGB) validates this. 
+6. **Investment and inflation dominate predictions.** Gross capital formation (~24% normalised importance across models), inflation, and unemployment drive model decisions, suggesting economic stability and business confidence strongly influence electoral preferences. 
 
 ## Assumptions and limitations
 
