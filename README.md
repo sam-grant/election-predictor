@@ -6,7 +6,7 @@ The work deploys machine learning methods to predict winners from 1960-2024 US p
 
 ✅ **Predicted 2024 correctly** (Trump victory)  
 ✅ **15 of 17 elections** classified correctly (1960-2024)  
-✅ **Three independent ML algorithms converged** to identical 88.2% accuracy (linear, tree-based, kernel-based models)
+✅ **Three independent ML algorithms converged** to identical 88.2% accuracy 
 
 ### What drives US presidential elections?
 1. **Gross capital formation** (~24% importance)
@@ -20,35 +20,6 @@ The work deploys machine learning methods to predict winners from 1960-2024 US p
 
 This study applies four machine learning algorithms (Logistic Regression, Random Forest, Support Vector Classifier, and XGBoost) to predict US presidential election outcomes (1960–2024), using macro socioeconomic indicators. After systematic feature engineering and hyperparameter optimisation, three independent model architectures converged on identical **88.2% accuracy (15/17 elections)**, suggesting this represents the performance ceiling achievable with this approach. Gross capital formation, unemployment, and inflation emerge as dominant predictors, with two consistent misclassifications (2016 Trump, 1976 Carter) reflect uniquely political circumstances that can override economic signals. -->
 
-## Repo details
-
-The workflow from raw data to a set of optimised models is contained in `main.ipynb`. Reptitive tasks are handled by three internal modules: 
-
-1. `process_data.py`: Processes, cleans, and merges raw data into data/proc/data.csv 
-1. `train.py`: Contains a configurable class Train which runs the training and outputs standard results (the model, test predictions, truth values, and probabilities) 
-1. `analyse.py`: Performs standard analysis on the results, returning statistics such as the confusion matrix, ROC-AUC, and accuracy
-
-The structure of the project is given below:
-```
-├── code
-│   ├── analyse.py # Model performance analysis
-│   ├── main.ipynb # Main project notebook 
-│   ├── plot.mplstyle # Plot styling
-│   ├── process_data.py # Data processing module
-│   └── train.py # Model training
-├── data
-│   ├── proc # Processed data (generated)
-│   └── raw # Raw data
-│       ├── election_data.csv
-│       ├── FRED_unemployment_rate_1948-2024.csv
-│       └── world_bank_indicators_1960-2023.csv
-├── images # Images (generated)
-├── models # Models (generated)
-├── README.md
-├── results # Analysis results (generated)
-```
-
-**Libraries:** pandas, numpy, matplotlib, scikit-learn, XGBoost
 
 ## Analysis report
 
@@ -297,3 +268,33 @@ Elections are not independent; political momentum and demographic shifts create 
 - Expand to state-level predictions (50 states × 17 elections = 850 samples)
 - Implement time-series aware validation strategies
 - Ensemble economic and non-economic features with regularisation
+
+## Technical details
+
+The workflow from raw data to a set of optimised models is contained in `main.ipynb`. Reptitive tasks are handled by three internal modules: 
+
+1. `process_data.py`: Processes, cleans, and merges raw data into data/proc/data.csv 
+1. `train.py`: Contains a configurable class Train which runs the training and outputs standard results (the model, test predictions, truth values, and probabilities) 
+1. `analyse.py`: Performs standard analysis on the results, returning statistics such as the confusion matrix, ROC-AUC, and accuracy
+
+The structure of the project is given below:
+```
+├── code
+│   ├── analyse.py # Model performance analysis
+│   ├── main.ipynb # Main project notebook 
+│   ├── plot.mplstyle # Plot styling
+│   ├── process_data.py # Data processing module
+│   └── train.py # Model training
+├── data
+│   ├── proc # Processed data (generated)
+│   └── raw # Raw data
+│       ├── election_data.csv
+│       ├── FRED_unemployment_rate_1948-2024.csv
+│       └── world_bank_indicators_1960-2023.csv
+├── images # Images (generated)
+├── models # Models (generated)
+├── README.md
+├── results # Analysis results (generated)
+```
+
+**Libraries:** pandas, numpy, matplotlib, scikit-learn, XGBoost
