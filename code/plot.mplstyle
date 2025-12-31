@@ -1,5 +1,3 @@
-# election.mplstyle
-
 # Generic figure tweaks 
 axes.prop_cycle: cycler("color", ['red','blue','green','orange','violet','cyan','pink','gray','yellow'])
 
