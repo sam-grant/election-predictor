@@ -6,7 +6,9 @@ import sqlite3
 def _resolve_path(relative_path):
     """ Helper to resolve relative paths """
     base_path = Path(__file__).parent
-    return base_path / relative_path    
+    resolved_path = base_path / relative_path
+    resolved_path.parent.mkdir(exist_ok=True)
+    return resolved_path    
 
 def process_election_data(file_path):
     """ Election winners """
