@@ -1,6 +1,6 @@
 # Predicting US presidential elections (1960-2024)
 
-The work deploys machine learning methods to predict winners from 1960-2024 US presidential elections with **88.2% accuracy** using economic data.
+This study applies four machine learning algorithms (Logistic Regression, Random Forest, Support Vector Classifier, and XGBoost) to predict winners from 1960-2024 US presidential elections with **88.2% accuracy** using economic data.
 
 ## Key findings
 
@@ -24,7 +24,7 @@ This study applies four machine learning algorithms (Logistic Regression, Random
 
 ### Overview
 
-This analysis explores whether macro socioeconomic indicators can predict US presidential election outcomes. Four machine learning classification models were systematically optimised to predict whether the winning candidate would be a Democrat or Republican, based on annual economic and social data during election years.
+This analysis explores whether macro socioeconomic indicators can predict US presidential election outcomes. Four machine learning classification models (Logistic Regression, Random Forest, Support Vector Classifier, and XGBoost) were systematically optimised to predict whether the winning candidate would be a Democrat or Republican, based on annual economic and social data during election years.
 
 ### Data
 
@@ -38,11 +38,11 @@ This analysis explores whether macro socioeconomic indicators can predict US pre
 - Linear interpolation filled remaining gaps
 - Final dataset: **35 features, 17 samples** (elections from 1960–2020)
 
-The small sample size (n=17) requires careful validation using Leave-One-Out Cross Validation (LOOCV).
+The small sample size (n=17) required Leave-One-Out Cross Validation (LOOCV).
 
 ### Methodology
 
-The analysis followed a systematic optimisation process, evaluating four model variants for each algorithm:
+The analysis followed a systematic optimisation process:
 
 1. **Base**: All 35 features with LOOCV
 2. **Selected**: 10 features identified by SelectKBest (ANOVA F-statistic)
@@ -112,21 +112,9 @@ The chart above reveals that **hyperparameter tuning contributed minimally to fi
 | **SVC** | 59% → 65% | 65% → **88%** | 88% → 88% | **0%** |
 | **XGBoost** | 59% → 59% | 59% → 65% | 65% → 82% | **17%** |
 
-**Key observations:**
+**Observations:**
 
-1. **Interaction terms drove performance**: The jump from Selected (10 features) to Interact (15 features with interactions) provided the largest gains (+23% for RF/SVC, +17% for LR).
-
-2. **Minimal hyperparameter sensitivity**: Random Forest and SVC achieved 88.2% accuracy with default hyperparameters. Grid search found no improvements, suggesting these models weren't sensitive to hyperparameter choices on this dataset.
-
-3. **Overfitting concerns**: The fact that extensive hyperparameter searches (216-22,032 combinations) typically yielded minimal or no improvements suggests the models (with the exception of XGBoost) are not overfitting to hyperparameter selection.
-
-4. **XGBoost required tuning**: The more complex XGBoost architecture benefited most from hyperparameter optimisation but still underperformed compared with simpler models suggests a pattern consistent with overfitting on limited data rather than capturing genuine signal.
-
-This analysis demonstrates that **model simplicity combined with good feature engineering outperformed complex architectures**, strengthening confidence in the 88.2% result as genuine rather than an artifact of overfitting.
-
-### Model convergence
-
-**Three independent algorithms (LR, RF, SVC) converged on identical 88.2% accuracy** after optimisation. This convergence across fundamentally different architectures strongly suggests **88.2% represents the performance ceiling achievable with macro socioeconomic indicators alone**.
+Interaction terms drove performance, with the jump from Selected (10 features) to Interact (15 features with interactions) providing the largest gains (+23% for RF/SVC, +17% for LR). Random Forest and SVC achieved 88.2% accuracy with default hyperparameters, and grid search found no improvements, suggesting minimal hyperparameter sensitivity on this dataset. The fact that extensive hyperparameter searches (216-22,032 combinations) typically yielded minimal or no improvements suggests the models (with the exception of XGBoost) are not overfitting to hyperparameter selection. The more complex XGBoost architecture benefited most from hyperparameter optimisation but still underperformed compared with simpler models, suggesting a pattern consistent with overfitting on limited data rather than capturing genuine signal. Notably, **three independent algorithms (LR, RF, SVC) converged on identical 88.2% accuracy** after optimisation, suggesting that 88.2% represents the performance ceiling achievable with macro socioeconomic indicators alone. This analysis demonstrates that model simplicity combined with good feature engineering outperformed complex architectures, strengthening confidence in the 88.2% result as genuine rather than an artifact of overfitting. 
 
 ## Classifications
 
