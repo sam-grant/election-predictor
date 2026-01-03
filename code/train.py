@@ -38,8 +38,9 @@ class Train:
         model = self._fit(X_train_scaled, y_train, random_state, **hyperparams)
         # Predict on test set
         y_pred = model.predict(X_test_scaled)
-        # Probabilities
-        y_proba = model.predict_proba(X_test_scaled)[:, 1] 
+        # Probabilities - find which column corresponds to positive class (1)
+        pos_idx = list(model.classes_).index(1)
+        y_proba = model.predict_proba(X_test_scaled)[:, pos_idx] 
         
         print(f"✅ Training complete.\n")
 
@@ -75,8 +76,9 @@ class Train:
             model = self._fit(X_train_scaled, y_train, random_state, **hyperparams)
             # Predict on the test sample
             y_pred = model.predict(X_test_scaled)
-            # Probabilities
-            y_proba = model.predict_proba(X_test_scaled)[:, 1]
+            # Probabilities - find which column corresponds to positive class (1)
+            pos_idx = list(model.classes_).index(1)
+            y_proba = model.predict_proba(X_test_scaled)[:, pos_idx]
             # Store results
             y_tests.append(y_test.values[0])
             y_preds.append(y_pred[0])

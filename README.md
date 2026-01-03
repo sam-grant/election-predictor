@@ -20,7 +20,6 @@ The work deploys machine learning methods to predict winners from 1960-2024 US p
 
 This study applies four machine learning algorithms (Logistic Regression, Random Forest, Support Vector Classifier, and XGBoost) to predict US presidential election outcomes (1960–2024), using macro socioeconomic indicators. After systematic feature engineering and hyperparameter optimisation, three independent model architectures converged on identical **88.2% accuracy (15/17 elections)**, suggesting this represents the performance ceiling achievable with this approach. Gross capital formation, unemployment, and inflation emerge as dominant predictors, with two consistent misclassifications (2016 Trump, 1976 Carter) reflect uniquely political circumstances that can override economic signals. -->
 
-
 ## Analysis report
 
 ### Overview
@@ -98,7 +97,7 @@ A comprehensive grid search with LOOCV was conducted on the four algorithms:
 - Best parameters: n_estimators=100, max_depth=3, learning_rate=0.05, subsample=0.6
 - Best CV accuracy: **0.765**
 
-![Model comparison](images/metrics_comparison.png)
+![Model comparison](images/gr_metrics_progression.png)
 
 #### 4. Performance attribution and robustness
 
@@ -132,6 +131,8 @@ This analysis demonstrates that **model simplicity combined with good feature en
 ## Classifications
 
 The table below shows model predictions with probability of Republican victory in brackets. Probabilities >0.5 predict Republican; <0.5 predict Democratic.
+
+**Note on SVC probabilities:** SVC uses Platt scaling to calibrate probabilities, which can be unreliable with small datasets (n=17). In some cases, the SVC predicted probabilities contradict the actual predictions (e.g., 1972: predicted Democratic but shows 62.9% Republican probability). This is a known limitation of SVC probability calibration. The tick marks (✅/❌) are based on the actual SVC predictions from the decision function, which are reliable, not the probability threshold.
 
 | Year | Winner            | Party       | LR         | RF         | SVC        | XGB        |
 |------|-------------------|-------------|------------|------------|------------|------------|
@@ -190,7 +191,7 @@ Elections with near-unanimous model agreement and high confidence:
 
 **4. XGBoost underperformance**
 
-Whilst LR, RF, and SVC each made 2–3 errors, XGBoost misclassified 4 elections (2016 Trump, 1996 Clinton, 1984 Reagan, 1976 Carter). The model's more complex architecture appears to overfit the limited training data despite regularisation.
+Whilst LR, RF, and SVC each made 2–3 errors, XGBoost misclassified 4 elections (2016 Trump, 1996 Clinton, 1984 Reagan, 1976 Carter). The model's more complex architecture may be less suitable to the limited training data, despite regularisation.
 
 **5. Ambiguous signals (near-50% probabilities)**
 
