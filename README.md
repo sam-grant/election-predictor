@@ -14,7 +14,7 @@ The work deploys machine learning methods to predict winners from 1960-2024 US p
 3. **Inflation** (8-18% importance)
 
 ### The misses
-**2016 Trump** and **1976 Carter** were both misclassified, which may reflect their unique political circumstances: the rise of populism with Trump and post-Watergate sentiment for Carter. 
+**2016 Trump** and **1976 Carter** were consistently misclassified, which may reflect their unique political circumstances: the rise of populism with Trump and post-Watergate sentiment for Carter. 
 
 <!-- ### Detailed abstract
 
@@ -118,9 +118,9 @@ The chart above reveals that **hyperparameter tuning contributed minimally to fi
 
 2. **Minimal hyperparameter sensitivity**: Random Forest and SVC achieved 88.2% accuracy with default hyperparameters. Grid search found no improvements, suggesting these models weren't sensitive to hyperparameter choices on this dataset.
 
-3. **Overfitting concerns addressed**: The fact that extensive hyperparameter searches (216-22,032 combinations) yielded minimal or no improvements suggests the models are not overfitting to hyperparameter selection. The signal comes from feature engineering, not model tuning.
+3. **Overfitting concerns**: The fact that extensive hyperparameter searches (216-22,032 combinations) typically yielded minimal or no improvements suggests the models (with the exception of XGBoost) are not overfitting to hyperparameter selection.
 
-4. **XGBoost required tuning**: The more complex XGBoost architecture benefited most from hyperparameter optimization but still underperformed simpler models—a pattern consistent with overfitting on limited data rather than capturing genuine signal.
+4. **XGBoost required tuning**: The more complex XGBoost architecture benefited most from hyperparameter optimisation but still underperformed compared with simpler models suggests a pattern consistent with overfitting on limited data rather than capturing genuine signal.
 
 This analysis demonstrates that **model simplicity combined with good feature engineering outperformed complex architectures**, strengthening confidence in the 88.2% result as genuine rather than an artifact of overfitting.
 
@@ -160,7 +160,6 @@ The table below shows model predictions with probability of Republican victory i
 
 Logistic Regression shows remarkably low confidence, with probabilities clustering around 0.5 (range: 0.483–0.519) despite 88.2% accuracy. Random Forest and SVC show strong confidence, with probabilities often exceeding 0.65 or below 0.35.
 
-
 ![Predicted probability distributions](images/predicted_probabilities.png)
 
 **2. The 2016 anomaly**
@@ -170,7 +169,7 @@ Logistic Regression shows remarkably low confidence, with probabilities clusteri
 - **SVC**: 0.494 probability Republican
 - **XGBoost**: 0.276 probability Republican
 
-SVC succeeded where others failed, but just barely. This suggests 2016's outcome was nearly orthogonal to macro socioeconomic indicators.
+SVC did correctly predict Republican. However, this is a case where the result from the model's decision function is in tension with its predicted probability (0.494 < 0.50: Democratic), raising questions over the reliability of SVC in this case.
 
 **3. The 1976 anomaly** 
 
@@ -179,15 +178,15 @@ SVC succeeded where others failed, but just barely. This suggests 2016's outcome
 - **SVC**: 0.669 probability Republican 
 - **XGBoost**: 0.700 probability Republican
 
-All models predicted a Republican victory with high relative confidence, which suggests that this election was driven by uniquely political circumstances during the post-Watergate upheaval. 
+All models predicted a Republican victory with high relative confidence, which suggests that this election was driven by uniquely political circumstances in the post-Watergate era. 
 
 **3. Consensus predictions**
 
-Elections with near-unanimous model agreement and high confidence:
-- **1988 Bush (R)**: RF=0.957, SVC=0.790, XGB=0.837 — strong Republican economic signals
-- **1992 Clinton (D)**: RF=0.146, SVC=0.007 — overwhelming Democratic indicators
-- **2024 Trump (R)**: SVC=0.982 — exceptionally strong Republican signal
-- **1960 Kennedy (D)**: RF=0.120, SVC=0.133 — clear Democratic economic conditions
+Elections with unanimous model agreement and high confidence:
+- **1988 Bush (R)**
+- **1992 Clinton (D)**
+- **2024 Trump (R)**
+- **1960 Kennedy (D)**
 
 **4. XGBoost underperformance**
 
