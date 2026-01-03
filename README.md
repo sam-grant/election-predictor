@@ -256,19 +256,9 @@ Box plots comparing the eight base features used in the final models between Dem
 
 Republican outcomes strongly associate with **lower unemployment** and **higher inflation**. Democratic outcomes associate with **higher population growth** and **higher fertility**.
 
-### Conclusions
+### Conclusion
 
-1. **Macro socioeconomic indicators are strong but imperfect predictors** of US presidential election outcomes, achieving 88.2% accuracy over 17 elections spanning 64 years.
-
-2. **Model convergence signals a performance ceiling.** Three independent algorithms with different architectures all converged on 88.2% accuracy, suggesting this represents the maximum achievable performance from macro socioeconomic data alone.
-
-3. **Sample size is a limitation.** With only 17 observations, models are constrained by limited training data despite using LOOCV and shallow architectures to prevent overfitting.
-
-4. **Feature engineering, not hyperparameter tuning, improved performance substantially.** Interaction terms drove the largest gains (65% → 88%), whilst hyperparameter optimization contributed minimally (0-6% for three models). This suggests the signal comes from the features themselves rather than model complexity, reducing overfitting concerns common with small datasets.
-
-5. **Exceptional political circumstances override economic signals.** Both misclassifications (2016 Trump, 1976 Carter) involved unique political contexts — populist movements and post-Watergate upheaval — that macro socioeconomic indicators cannot capture.
-
-6. **Investment and inflation dominate predictions.** Gross capital formation (~24% normalised importance across models), inflation, and unemployment drive model decisions, suggesting economic stability and business confidence strongly influence electoral preferences. 
+Macro socioeconomic indicators proved to be strong but imperfect predictors of US presidential election outcomes, achieving 88.2% accuracy over 17 elections spanning 64 years. Three independent algorithms converged on this accuracy, suggesting it represents the ceiling for what economic data alone can predict. Despite limited training data (n=17), over-fitting concerns are somewhat mitigated by the fact that feature engineering, not hyperparameter tuning, drove performance gains from 65% to 88%, with tuning contributing minimally (0-6%) for the best models. The two consistent misclassifications (2016 Trump, 1976 Carter) both involved exceptional political circumstances. Gross capital formation, unemployment, and inflation emerged as dominant predictors, indicating that economic stability and business confidence strongly influence electoral preferences.
 
 ## Assumptions and limitations
 
